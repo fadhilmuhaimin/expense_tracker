@@ -9,50 +9,34 @@ final kDarkColorScheme = ColorScheme.fromSeed(
 );
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        darkTheme: ThemeData(colorScheme: kDarkColorScheme, useMaterial3: true).copyWith(
-            appBarTheme: const AppBarTheme().copyWith(
-                backgroundColor: kDarkColorScheme.onPrimaryContainer,
-                foregroundColor: kDarkColorScheme.primaryContainer),
-            cardTheme: const CardTheme().copyWith(
-                color: kDarkColorScheme.secondaryContainer,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: kDarkColorScheme.primaryContainer)),
-            textTheme: ThemeData().textTheme.copyWith(
-                titleLarge: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: kDarkColorScheme.onSecondaryContainer,
-                    fontSize: 14))),
-        theme: ThemeData(
+  runApp(MaterialApp(
+      title: 'Flutter Demo',
+      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+        colorScheme: kDarkColorScheme,
+        cardTheme: const CardTheme().copyWith(
+            color: kDarkColorScheme.secondaryContainer,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: kDarkColorScheme.primaryContainer)),
+      ),
+      theme: ThemeData(
+        useMaterial3: true,
+      ).copyWith(
           colorScheme: kColorScheme,
-          useMaterial3: true,
-        ).copyWith(
-            appBarTheme: const AppBarTheme().copyWith(
-                backgroundColor: kColorScheme.onPrimaryContainer,
-                foregroundColor: kColorScheme.primaryContainer),
-            cardTheme: const CardTheme().copyWith(
-                color: kColorScheme.secondaryContainer,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: kColorScheme.primaryContainer)),
-            textTheme: ThemeData().textTheme.copyWith(
-                titleLarge: TextStyle(fontWeight: FontWeight.bold, color: kColorScheme.onSecondaryContainer, fontSize: 14))),
-                themeMode: ThemeMode.dark,
-        home: const Expenses());
-  }
+          appBarTheme: const AppBarTheme().copyWith(
+              backgroundColor: kColorScheme.onPrimaryContainer,
+              foregroundColor: kColorScheme.primaryContainer),
+          cardTheme: const CardTheme().copyWith(
+              color: kColorScheme.secondaryContainer,
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: kColorScheme.primaryContainer)),
+          textTheme: ThemeData().textTheme.copyWith(
+              titleLarge: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: kColorScheme.onSecondaryContainer,
+                  fontSize: 14))),
+      home: const Expenses()));
 }
