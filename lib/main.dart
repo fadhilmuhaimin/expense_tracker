@@ -38,5 +38,6 @@ void main() {
                   fontWeight: FontWeight.bold,
                   color: kColorScheme.onSecondaryContainer,
                   fontSize: 14))),
+                  
       home: const Expenses()));
 }

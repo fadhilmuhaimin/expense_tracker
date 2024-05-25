@@ -1,5 +1,7 @@
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/chart/chart_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Chart extends StatelessWidget {
   const Chart({super.key, required this.expenses});
@@ -18,7 +20,9 @@ class Chart extends StatelessWidget {
   double get maxTotalExpense {
     double maxTotalExpense = 0;
     for (final bucket in buckets) {
-      maxTotalExpense = bucket.totalExpenses;
+      if (bucket.totalExpenses > maxTotalExpense) {
+        maxTotalExpense = bucket.totalExpenses;
+      }
     }
     return maxTotalExpense;
   }
@@ -29,23 +33,38 @@ class Chart extends StatelessWidget {
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       width: double.infinity,
+      height: 180,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          gradient: LinearGradient(colors: [
-            Theme.of(context).colorScheme.primary.withOpacity(0.3),
-            Theme.of(context).colorScheme.primary.withOpacity(0.0)
-          ], begin: Alignment.bottomCenter, end: Alignment.topCenter),),
-          child: const Column(
+        borderRadius: BorderRadius.circular(8),
+        gradient: LinearGradient(colors: [
+          Theme.of(context).colorScheme.primary.withOpacity(0.3),
+          Theme.of(context).colorScheme.primary.withOpacity(0.0)
+        ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                for (final bucket in buckets)
+                  ChartBar(
+                      fill: bucket.totalExpenses == 0
+                          ? 0
+                          : bucket.totalExpenses / maxTotalExpense),
+              ],
+            ),
+          ),
+          SizedBox(height: 10,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  
-                ],
-              ))
+              for (final bucket in buckets)
+                Expanded(child: Center(child: Icon(categoryIcons[bucket.category])))
             ],
           ),
-
+        ],
+      ),
     );
   }
 }
